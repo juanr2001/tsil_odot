@@ -1,13 +1,13 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe "todo_lists/index" do
+RSpec.describe "todo_lists/index", type: :view do
   before(:each) do
     assign(:todo_lists, [
-      stub_model(TodoList,
+      TodoList.create!(
         :title => "Title",
         :description => "MyText"
       ),
-      stub_model(TodoList,
+      TodoList.create!(
         :title => "Title",
         :description => "MyText"
       )
@@ -16,7 +16,6 @@ describe "todo_lists/index" do
 
   it "renders a list of todo_lists" do
     render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "tr>td", :text => "Title".to_s, :count => 2
     assert_select "tr>td", :text => "MyText".to_s, :count => 2
   end
