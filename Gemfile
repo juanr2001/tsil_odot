@@ -48,6 +48,5 @@ group :development, :test do
 end
 
 group :test do
-    gem 'capybara'
-
+    gem 'capybara', '~> 2.5.0'
 end
