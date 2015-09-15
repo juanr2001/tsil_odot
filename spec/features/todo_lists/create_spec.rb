@@ -33,7 +33,7 @@ RSpec.feature "Todo List", :type => :feature do
             expect(page).to_not have_content("This is what I'm doing today")
         end
 
-            it "display an error when the todo list has a title less than 3 character" do
+        it "display an error when the todo list has a title less than 3 character" do
 
             visit "/todo_lists"
             click_link "New Todo list"
@@ -49,6 +49,39 @@ RSpec.feature "Todo List", :type => :feature do
             visit "/todo_lists"
             expect(page).to_not have_content("This is what I'm doing today")
         end
-    end
 
+        it "display an error when the todo list has no description" do
+
+            visit "/todo_lists"
+            click_link "New Todo list"
+            expect(page).to have_content("New Todo List")
+
+            fill_in "Title", with: "Homework"
+            fill_in "Description", with: ""
+            click_button "Create Todo list"
+
+            expect(page).to have_content("error")
+            expect(TodoList.count).to eq(0)
+
+            visit "/todo_lists"
+            expect(page).to_not have_content("Homework")
+        end
+
+        it "display an error when the todo list has no description" do
+
+            visit "/todo_lists"
+            click_link "New Todo list"
+            expect(page).to have_content("New Todo List")
+
+            fill_in "Title", with: "Homework"
+            fill_in "Description", with: "Math"
+            click_button "Create Todo list"
+
+            expect(page).to have_content("error")
+            expect(TodoList.count).to eq(0)
+
+            visit "/todo_lists"
+            expect(page).to_not have_content("Homework")
+        end
+    end
 end
