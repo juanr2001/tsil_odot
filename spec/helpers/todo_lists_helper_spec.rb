@@ -11,5 +11,9 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe TodoListsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "#todo_list_title" do
+    it "returns the default title" do
+      expect(helper.todo_list_title).to eql("My title")
+    end
+  end
 end
