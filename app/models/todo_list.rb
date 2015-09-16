@@ -1,5 +1,8 @@
 class TodoList < ActiveRecord::Base
 
+    #Associations
+    has_many :todo_items
+
     #Validations
     validates :title, presence: true
     validates :title, length: {minimum: 3}
