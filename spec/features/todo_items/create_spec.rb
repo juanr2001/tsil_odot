@@ -4,12 +4,7 @@ RSpec.feature "Todo List", :type => :feature do
 
     describe "Adding todo items" do
         let!(:todo_list) {TodoList.create(title: "Homework", description: "Math test coming up") }
-        def visit_todo_list(list)
-            visit "/todo_lists"
-            within "#todo_list_#{list.id}" do
-                click_link "List Items"
-            end
-        end
+
 
         it "is successful with valid content" do
             visit_todo_list(todo_list)
