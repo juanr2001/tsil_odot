@@ -41,6 +41,16 @@ class TodoItemsController < ApplicationController
         end
     end
 
+    def destroy
+        @todo_item = @todo_list .todo_items.find( params[ :id ] )
+        if @todo_item.destroy 
+            flash[:success] = "Todo list item was deleted."
+        else 
+            flash[:error] = "Todo list item could not be deleted."
+        end
+        redirect_to todo_list_todo_items_path
+    end
+
 #This method will prevent me to write (@todo_list_id) in the controller and the view every time
 #This will call the todo_list_id every time, so this will fetch it everytime it want a todo_item_id.
 #That will put the todo_list_id param in every method in the controller.
