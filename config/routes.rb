@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   resources :todo_lists do
     resources :todo_items do
       # Add route for marking a todo item complete:
-      member do
-        patch :complete
-      end
-      end
+        member do
+          patch :complete
+        end
+    end
   end
   root 'todo_lists#index'
   # The priority is based upon order of creation: first created -> highest priority.
