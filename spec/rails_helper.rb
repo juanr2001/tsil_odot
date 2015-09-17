@@ -35,6 +35,7 @@ RSpec.configure do |config|
 
   #Here I include the module for the helpers
   config.include TodoListHelpers, type: :feature
+  config.include RailsDomIdHelper, type: :feature
 
 #------------------------------------------------------#
 
