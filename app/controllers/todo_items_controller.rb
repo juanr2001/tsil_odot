@@ -18,7 +18,7 @@ class TodoItemsController < ApplicationController
 
         else
             flash[:error] = "There was a problem adding that todo item"
-            render action :new
+            render action: :new
         end
     end
 
