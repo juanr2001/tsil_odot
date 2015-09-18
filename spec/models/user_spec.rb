@@ -7,7 +7,10 @@ RSpec.describe User, type: :model do
             {
                 first_name: "Juan",
                 last_name: "Ordaz",
-                email: "juanordaz@gmail.com"
+                email: "juanordaz@gmail.com",
+                password: "juan123",
+                password_confirmation: "juan123"
+
             }
         }
 
@@ -31,6 +34,11 @@ RSpec.describe User, type: :model do
             it "requires a unique email (case insensitive)" do
                 user.email = "JUANORDAZ@GMAIL"
                 expect( user ).to validate_uniqueness_of( :email )
+            end
+
+            it "requires the email address to look like an email" do
+            user.email = "juan"
+            expect( user ).to_not be_valid
             end
         end
 
