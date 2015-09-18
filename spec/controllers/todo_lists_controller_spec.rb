@@ -110,8 +110,8 @@ RSpec.describe TodoListsController, type: :controller do
         todo_list = TodoList.create! valid_attributes
         put :update, {:id => todo_list.to_param, :todo_list => new_attributes}, valid_session
         todo_list.reload
-        # expect(todo_list.title).to eq("Playing")
-        # expect(todo_list.description).to eq("With my friends")
+        expect(todo_list.title).to eq("Playing")
+        expect(todo_list.description).to eq("With my friends")
       end
 
       it "assigns the requested todo_list as @todo_list" do
