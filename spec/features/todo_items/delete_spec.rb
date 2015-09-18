@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Todo List", :type => :feature do
+RSpec.feature "Todo Item", :type => :feature do
 
     describe "Deleting todo items" do
         let!(:todo_list) {TodoList.create(title: "Homework", description: "Math test") }
