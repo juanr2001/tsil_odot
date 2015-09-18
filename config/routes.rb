@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :users
   resources :todo_lists do
     resources :todo_items do
       # Add route for marking a todo item complete:
