@@ -42,6 +42,47 @@ RSpec.describe UserSessionsController, type: :controller do
         #expect this user object recieves a authenticate method
         post :create, email: "juanordaz@gmail.com", password: "password"
       end
+
+      #this test will allow Rails that the user is logged in
+      it "sets the user_id in the session" do
+        post :create, email: "juanordaz@gmail.com", password: "password"
+        expect(session[ :user_id ] ).to eq( user.id )
+      end
+
+      it "sets the flash success message" do
+        post :create, email: "juanordaz@gmail.com", password: "password"
+        expect( flash[ :success ] ).to eq( "Thanks for logging in!")
+      end
     end
+
+      #failure scenerios
+      context "with blank credentials" do
+
+        it "redenders the new template" do
+          post :create, email: "", password: ""
+          expect( response ).to render_template( 'new' )
+        end
+
+        it "sets the flash error message" do
+          post :create
+          expect( flash[ :error ] ).to eq( "There was a problem logging in. Please check your email and password" )
+        end
+      end
+
+      #if user has email, but not in the system
+      context "with incorrect password" do
+        let!( :user ) { User.create( first_name: "Juan", last_name: "Ordaz", email: "juanordaz@gmail.com", password: "password", password_confirmation: "password" ) }
+
+        it "redenders the new template" do
+          post :create, email: user.email , password: "Blahh"
+          expect( response ).to render_template( 'new' )
+        end
+
+        it "sets the flash error message" do
+          post :create, email: user.email , password: "Blahh"
+          expect( flash[ :error ] ).to eq( "There was a problem logging in. Please check your email and password" )
+        end
+      end
+
   end
 end
