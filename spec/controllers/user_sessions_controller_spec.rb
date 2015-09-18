@@ -55,34 +55,45 @@ RSpec.describe UserSessionsController, type: :controller do
       end
     end
 
+    shared_examples_for "denied login" do
       #failure scenerios
       context "with blank credentials" do
 
         it "redenders the new template" do
-          post :create, email: "", password: ""
+          #here password are not evaluated here
+          post :create, email: email, password: password
           expect( response ).to render_template( 'new' )
         end
 
         it "sets the flash error message" do
-          post :create
+          #here password are not evaluated here
+          post :create, email: email, password: password
           expect( flash[ :error ] ).to eq( "There was a problem logging in. Please check your email and password" )
         end
+      end
+
+    end
+
+    #failure scenerios
+      context "with blank credentials" do
+        let( :email ) { "" }
+        let( :password ) { "" }
+        it_behaves_like "denied login"
       end
 
       #if user has email, but not in the system
       context "with incorrect password" do
         let!( :user ) { User.create( first_name: "Juan", last_name: "Ordaz", email: "juanordaz@gmail.com", password: "password", password_confirmation: "password" ) }
 
-        it "redenders the new template" do
-          post :create, email: user.email , password: "Blahh"
-          expect( response ).to render_template( 'new' )
-        end
-
-        it "sets the flash error message" do
-          post :create, email: user.email , password: "Blahh"
-          expect( flash[ :error ] ).to eq( "There was a problem logging in. Please check your email and password" )
-        end
+        let( :email ) { user.email }
+        let( :password ) { "incorrect" }
+        it_behaves_like "denied login"
       end
 
-  end
+      context "with no email in existance" do
+        let( :email ) { "blah@blah.com" }
+        let( :password ) { "incorrect" }
+        it_behaves_like "denied login"
+      end
+    end
 end
