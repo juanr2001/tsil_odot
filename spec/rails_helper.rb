@@ -36,7 +36,8 @@ RSpec.configure do |config|
   #Here I include the module for the helpers
   config.include TodoListHelpers, type: :feature
   config.include RailsDomIdHelper, type: :feature
-
+  config.include FactoryGirl::Syntax::Methods
+  config.include AuthenticationHelpers, type: :controller
 #------------------------------------------------------#
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

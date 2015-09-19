@@ -37,9 +37,14 @@ RSpec.describe TodoListsController, type: :controller do
   let(:valid_session) { {} }
 
   before do
+
+    #including this from the support helper
+    #factory girl test method(build_strubbed) would return an object that looks like another object but doesn't touch the database
+    sign_in(build_stubbed( :user ))
+
     #To make sure an User object is return
-    allow(controller).to receive_message_chain( :current_user ).and_return( User.new )
-    # allow(controller).to receive_message_chain(:require_user).and_return(true)
+        # allow(controller).to receive_message_chain( :current_user ).and_return(build_stubbed(:user))
+        # allow(controller).to receive_message_chain(:require_user).and_return(true)
   end
 
   describe "GET #index" do
