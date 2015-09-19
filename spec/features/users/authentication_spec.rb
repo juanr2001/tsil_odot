@@ -22,8 +22,6 @@ RSpec.feature "User", :type => :feature do
             expect( page ).to have_content( "Please check your email and password" )
             expect( page ).to have_field( "Email Address", with: "juanordaz@gmail.com" )
         end
-
-
     end
 
 end
