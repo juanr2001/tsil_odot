@@ -37,8 +37,11 @@ RSpec.describe TodoListsController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
+
     it "assigns all todo_lists as @todo_lists" do
       todo_list = TodoList.create! valid_attributes
+      allow(controller).to receive_message_chain(:require_user).and_return(true)
+      # controller( :require_user ).and_return( true )
       get :index, {}, valid_session
       expect(assigns(:todo_lists)).to eq([todo_list])
     end
