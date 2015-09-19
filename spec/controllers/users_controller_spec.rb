@@ -81,6 +81,11 @@ RSpec.describe UsersController, type: :controller do
         post :create, {:user => valid_attributes}, valid_session
         expect(response).to redirect_to(User.last)
       end
+
+      it "sets the session user_id to the created user" do
+        post :create, { :user => valid_attributes }, valid_session
+        expect( session[ :user_id ] ).to eq( User.find_by( email: valid_attributes[ "email" ] ).id )
+      end
     end
 
     context "with invalid params" do
