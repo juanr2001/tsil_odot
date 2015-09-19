@@ -14,6 +14,11 @@ RSpec.describe User, type: :model do
             }
         }
 
+        context "relationships" do
+            it { should have_many( :todo_lists ) }
+        end
+
+
         context "validations" do
             #this user is not save in the database yet.
             let( :user ) { User.new( valid_attributes ) }
