@@ -3,7 +3,16 @@ require 'rails_helper'
 RSpec.feature "Todo List", :type => :feature do
 
     describe "Deleting todo lists" do
+        #User Object
+        let( :user ) { create( :user ) }
+
         let! (:todo_list) { TodoList.create(title: "Homework", description: "Math Project") }
+
+#sign_in
+        before do
+            #Used same password created in factories.rb
+            sign_in( user, password: "blagsa" )
+        end
 
         it "is successful when clicking the destroy link" do
             visit "/todo_lists"

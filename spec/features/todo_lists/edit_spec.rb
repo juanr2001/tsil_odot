@@ -3,15 +3,17 @@ require 'rails_helper'
 RSpec.feature "Todo List", :type => :feature do
 
     describe "Editing todo lists" do
+        #User object
+        let( :user ) { create( :user ) }
 
-        let! (:todo_list) { TodoList.create(title: "Homework", description: "Math Project") }
+        let! ( :todo_list ) { TodoList.create( title: "Homework", description: "Math Project" ) }
 
 
         def update_todo_list( options = { } )
-            options[:title] ||= "My todo list"
-            options[:description] ||= "This is my todo list"
+            options[ :title ] ||= "My todo list"
+            options[ :description ] ||= "This is my todo list"
 
-            todo_list = options[:todo_list]
+            todo_list = options[ :todo_list ]
 
             visit "/todo_lists"
             #Here I tell Capybara to select an object with an id.
@@ -22,6 +24,12 @@ RSpec.feature "Todo List", :type => :feature do
             fill_in "Title", with: options[:title]
             fill_in "Description", with: options[:description]
             click_button "Update Todo list"
+        end
+
+        #sign_in user here
+        before do
+            #Used same password created in factories.rb
+            sign_in( user, password: "blagsa" )
         end
 
         it "updates a todo list successfully with correct information" do
