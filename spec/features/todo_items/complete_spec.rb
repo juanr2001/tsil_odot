@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.feature "Todo List", :type => :feature do
 
     describe "Editing todo items" do
+
+        let( :user ) { create( :user ) }
+        before { sign_in user, password: "blagsa" }
+
         let!(:todo_list) {TodoList.create(title: "Homework", description: "Math test") }
         #I'm passing the object above to the bottom,since they have relationship
         let!(:todo_item) { todo_list.todo_items.create(content: "Study") }

@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.feature "Todo List", :type => :feature do
 
     describe "Adding todo items" do
+
+        let( :user ) { create( :user ) }
+        before { sign_in user, password: "blagsa" }
+
         let!(:todo_list) {TodoList.create(title: "Homework", description: "Math test coming up") }
 
 
@@ -12,7 +16,7 @@ RSpec.feature "Todo List", :type => :feature do
             fill_in "Content", with: "Milk"
             click_button "Save"
             expect(page).to have_content("Added todo list item.")
-            within("ul.todo_items") do
+            within("table.todo_items") do
                 expect(page).to have_content("Milk")
             end
         end
