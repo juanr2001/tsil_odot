@@ -1,14 +1,13 @@
 <h1><%= @todo_list.title%></h1>
 
-<table class="todo_items">
-    <table class = "todo_items">
-        <thead>
-            <tr>
-                <th width = "25%">Completed?</th>
-                <th width = "65%">Content</th>
-                <th width = "10%">Functions</th>
-            </tr>
-        </thead>
+<table class = "todo_items">
+    <thead>
+        <tr>
+            <th width = "25%">Completed?</th>
+            <th width = "65%">Content</th>
+            <th width = "10%">Functions</th>
+        </tr>
+    </thead>
     <tbody>
         <% @todo_list.todo_items.each do | todo_item |%>
         <tr id = "<%= dom_id(todo_item) %>">
