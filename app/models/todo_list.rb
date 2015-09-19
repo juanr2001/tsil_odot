@@ -2,6 +2,7 @@ class TodoList < ActiveRecord::Base
 
     #Associations
     has_many :todo_items
+    belongs_to :user
 
     #Validations
     validates :title, presence: true

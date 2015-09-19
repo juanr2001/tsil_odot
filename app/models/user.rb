@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
     #instance public methods api.rubyonrails.org
     has_secure_password
 
+    #Associations
+    has_many :todo_lists
+
     #validations
     validates :email, presence: true,
                                                 uniqueness: true,
