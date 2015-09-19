@@ -45,6 +45,9 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'pry'
 
+#Test helpers simplification
+  gem 'factory_girl', '~> 4.5.0'
+
 end
 
 group :test do
