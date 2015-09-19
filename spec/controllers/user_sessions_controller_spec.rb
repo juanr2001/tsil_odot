@@ -55,6 +55,7 @@ RSpec.describe UserSessionsController, type: :controller do
       end
     end
 
+#shared examples
     shared_examples_for "denied login" do
       #failure scenerios
       context "with blank credentials" do
