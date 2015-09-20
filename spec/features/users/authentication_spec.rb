@@ -3,9 +3,11 @@ require 'rails_helper'
 RSpec.feature "User", :type => :feature do
 
     describe "Logging in" do
-        it "logs the user i and goes to the todo lists" do
+        it "logs the user in and goes to the todo lists" do
             User.create( first_name: "Juan", last_name: "Ordaz", email: "juanordaz@gmail.com", password: "password", password_confirmation: "password" )
-            visit new_user_session_path
+
+            visit "/"
+            click_link "Log In"
             fill_in "Email Address", with: "juanordaz@gmail.com"
             fill_in "Password", with: "password"
             click_button "Log In"
