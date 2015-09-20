@@ -32,7 +32,7 @@ RSpec.feature "Todo List", :type => :feature do
         end
 
         it "display an error when the todo list has no title" do
-
+           expect(TodoList.count).to eq(0)
            create_todo_list title: ""
 
             expect(page).to have_content("error")
@@ -43,7 +43,7 @@ RSpec.feature "Todo List", :type => :feature do
         end
 
         it "display an error when the todo list has a title less than 3 character" do
-
+            expect(TodoList.count).to eq(0)
             create_todo_list title: "Hi"
 
             expect(page).to have_content("error")
@@ -54,7 +54,7 @@ RSpec.feature "Todo List", :type => :feature do
         end
 
         it "display an error when the todo list has no description" do
-
+            expect(TodoList.count).to eq(0)
             create_todo_list title: "Homework", description: ""
 
             expect(page).to have_content("error")
@@ -65,7 +65,7 @@ RSpec.feature "Todo List", :type => :feature do
         end
 
         it "display an error when the todo list has no description" do
-
+            expect(TodoList.count).to eq(0)
             create_todo_list title: "Homework", description: "Math"
 
             expect(page).to have_content("error")
