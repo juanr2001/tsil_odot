@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
 
+#main
+  root 'todo_lists#index'
+
   get "/login" => "user_sessions#new", as: :login
   resources :users
   resources :user_sessions, only: [ :new, :create ]
-
+  resources :password_resets, only: [ :new, :create ]
   resources :todo_lists do
     resources :todo_items do
       # Add route for marking a todo item complete:
@@ -12,7 +15,6 @@ Rails.application.routes.draw do
         end
     end
   end
-  root 'todo_lists#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
