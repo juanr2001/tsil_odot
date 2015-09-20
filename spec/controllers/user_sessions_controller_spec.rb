@@ -85,7 +85,6 @@ RSpec.describe UserSessionsController, type: :controller do
       #if user has email, but not in the system
       context "with incorrect password" do
         let!( :user ) { User.create( first_name: "Juan", last_name: "Ordaz", email: "juanordaz@gmail.com", password: "password", password_confirmation: "password" ) }
-
         let( :email ) { user.email }
         let( :password ) { "incorrect" }
         it_behaves_like "denied login"
@@ -95,6 +94,36 @@ RSpec.describe UserSessionsController, type: :controller do
         let( :email ) { "blah@blah.com" }
         let( :password ) { "incorrect" }
         it_behaves_like "denied login"
+      end
+    end
+
+    describe "DELETE destroy" do
+      context "logged in" do
+        before do
+          sign_in create( :user )
+        end
+
+        it "returns a redirect" do
+          delete :destroy
+          expect(response).to be_redirect
+        end
+
+        it "sets the flash message" do
+          delete :destroy
+          expect(flash[:notice]).to_not be_blank
+          expect(flash[:notice]).to match(/logged out/)
+        end
+
+        it "removes the session[:user_id] key" do
+          session[:user_id] = 1
+          delete :destroy
+          expect(session[:user_id]).to be_nil
+        end
+
+        it "resets the session" do
+          expect(controller).to receive(:reset_session)
+          delete :destroy
+        end
       end
     end
 end
