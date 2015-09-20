@@ -4,10 +4,11 @@ RSpec.feature "Todo List", :type => :feature do
 
     describe "Adding todo items" do
 
-        let( :user ) { create( :user ) }
+        let( :user ) { todo_list.user }
+        let!( :todo_list ) { create( :todo_list ) }
         before { sign_in user, password: "blagsa" }
 
-        let!(:todo_list) {TodoList.create(title: "Homework", description: "Math test coming up") }
+        # let!(:todo_list) {TodoList.create(title: "Homework", description: "Math test coming up") }
 
 
         it "is successful with valid content" do

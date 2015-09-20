@@ -41,7 +41,7 @@ RSpec.describe TodoListsController, type: :controller do
 
     #including this from the support helper
     #factory girl test method(build_strubbed) would return an object that looks like another object but doesn't touch the database
-    sign_in( :user )
+    sign_in( user )
 
     #To make sure an User object is return
         # allow(controller).to receive_message_chain( :current_user ).and_return(build_stubbed(:user))
@@ -117,7 +117,7 @@ RSpec.describe TodoListsController, type: :controller do
 
       it "redirects to the created todo_list" do
         post :create, {:todo_list => valid_attributes}, valid_session
-        response.should redirect_to(TodoList.last)
+        expect( response ).to redirect_to(TodoList.last)
       end
 
       it "creates a todo list for the current user" do
@@ -138,7 +138,7 @@ RSpec.describe TodoListsController, type: :controller do
       it "assigns a newly created but unsaved todo_list as @todo_list" do
         allow_any_instance_of(TodoList).to receive_message_chain( :save ).and_return(false)
         post :create, {:todo_list => invalid_attributes}, valid_session
-        assigns(:todo_list).to be_a_new(TodoList)
+        expect(assigns(:todo_list)).to be_a_new(TodoList)
         expect(assigns(:todo_list).user).to eq(user)
       end
 

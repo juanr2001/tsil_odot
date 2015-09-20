@@ -4,10 +4,13 @@ RSpec.feature "Todo List", :type => :feature do
 
     describe "Editing todo lists" do
         #User object
-        let( :user ) { create( :user ) }
+        # let( :user ) { create( :todo_list ) }
+        let( :user ) { todo_list.user }
 
-        let! ( :todo_list ) { TodoList.create( title: "Homework", description: "Math Project" ) }
 
+        let! ( :todo_list ) { create( :todo_list ) }
+        #another way I can do this is calling the User object on top
+        # let! ( :todo_list ) { create( :todo_list, user: user  ) }
 
         def update_todo_list( options = { } )
             options[ :title ] ||= "My todo list"
@@ -29,7 +32,8 @@ RSpec.feature "Todo List", :type => :feature do
         #sign_in user here
         before do
             #Used same password created in factories.rb
-            sign_in( user, password: "blagsa" )
+            #I sign in a todo_list user, instead of the User object on top
+            sign_in( todo_list.user, password: "blagsa" )
         end
 
         it "updates a todo list successfully with correct information" do
