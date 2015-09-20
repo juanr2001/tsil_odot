@@ -4,9 +4,11 @@ RSpec.feature "Todo List", :type => :feature do
 
     describe "Deleting todo lists" do
         #User Object
-        let( :user ) { create( :user ) }
 
-        let! (:todo_list) { TodoList.create(title: "Homework", description: "Math Project") }
+        let( :user ) { todo_list.user }
+
+
+        let! ( :todo_list ) { create( :todo_list ) }
 
 #sign_in
         before do

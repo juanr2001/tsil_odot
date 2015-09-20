@@ -4,12 +4,15 @@ RSpec.feature "Todo List", :type => :feature do
 
     describe "Editing todo items" do
 
-        let( :user ) { create( :user ) }
+        let( :user ) { todo_list.user }
+        let!( :todo_list ) { create( :todo_list ) }
+        let!(:todo_item) { todo_list.todo_items.create( content: "Study" ) }
         before { sign_in user, password: "blagsa" }
 
-        let!(:todo_list) {TodoList.create(title: "Homework", description: "Math test") }
-        #I'm passing the object above to the bottom,since they have relationship
-        let!(:todo_item) { todo_list.todo_items.create(content: "Study") }
+        #Changed this code because I now have associations
+        # let!(:todo_list) {TodoList.create(title: "Homework", description: "Math test") }
+        # #I'm passing the object above to the bottom,since they have relationship
+        # let!(:todo_item) { todo_list.todo_items.create(content: "Study") }
 
 
         it "is successful with valid content" do
