@@ -63,7 +63,7 @@ RSpec.describe PasswordResetsController, type: :controller do
                 end
             end
 
-            context "with no password_reset_token" do
+            context "with no password_reset_token found" do
                 it "renders the 404 page" do
                     get :edit, id: "not found"
                     expect( response.status ).to eq( 404 )
