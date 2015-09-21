@@ -4,7 +4,21 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   add_flash_types :success
 
+  #Rescue from not finding a Active Record User Object
+  rescue_from ActiveRecord::RecordNotFound, with: :render_404
+  #if I have an invalid signature. If I user edit the cookie it raises Message Verifier
+  rescue_from ActiveSupport::MessageVerifier::InvalidSignature, with: :render_error
+
   private
+
+  def render_404
+    render file 'public/400.html', status: :not_found, layout: false
+  end
+
+  def render_error
+    render file: 'public/500.html', status: :internal_server_error, layout: false
+  end
+
   def logged_in?
     current_user
   end
@@ -14,7 +28,15 @@ class ApplicationController < ActionController::Base
   #this make my todo_list_controller fail because now it requires a user.
   def current_user
     #conditional assignment
-    @current_user ||= User.find( session[ :user_id ] ) if session[ :user_id ]
+      if session[ :user_id ]
+        @current_user ||= User.find( session[ :user_id ] )
+      elsif cookies.permanent.signed[ :remember_me_token ]
+        verification = Rails.application.message_verifier( :remember_me ).verify( cookies.permanent.signed[ :remember_me_token ] )
+        if verification
+          Rails.logger.info "Logging in by cookie."
+          @current_user ||= User.find( verification )
+        end
+      end
   end
   helper_method( :current_user )
 
