@@ -1,38 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Todo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag "vendor/modernizr" %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Todo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <% flash.each do | type, message | %>
+        <div class = "flash alert-box text-center <%= type %>" >
+            <%= message %>
+            <!-- button to dismiss any alert message that pop-up, &times is X to close -->
+            <a href="#" class = "close">&times;</a>
+        </div>
+    <%end%>
 
-<div class = "nav">
-    <h1><%= link_to "Tsil Odot", root_path %></h1>
-    <ul>
-      <li><%= link_to "Todo Lists", todo_lists_path %></li>
-      <% if logged_in? %>
-        <li><%= link_to "Log Out", logout_path, method: :delete %></li>
-      <% else %>
-          <li><%= link_to "Log In", new_user_session_path %></li>
-          <li><%= link_to "Sign Up", new_user_path %></li>
-      <% end %>
-    </ul>
-    <br class = "clear" />
-</div>
+    <header class = "row global-header">
+    <!-- screen sizes -->
+      <div class = "small-12 small-centered medium-8 medium-centered large-5 large-centered columns">
+        <%= link_to "Todo Lists", todo_lists_path %>
+        <% if logged_in? %>
+          <%= link_to "Log Out", logout_path, method: :delete %>
+        <% else %>
+            <%= link_to "Log In", new_user_session_path %>
+            <%= link_to "Sign Up", new_user_path %>
+        <% end %>
+      </div>
+    </header><!-- /header -->
 
-<% flash.each do | type, message | %>
-    <div class = "alert flash <%= type %>" >
-        <%= message %>
-    </div>
-<%end%>
+    <!-- row collapse create a new row, will make sure  collumns expand edge to edge when it gets to smaill-12-->
+      <div class = "row collapse">
+          <div class = "small-12 small-centered medium-8 medium-centered large-5 large-centered columns">
+            <%= yield %>
+          </div>
+      </div>
 
-<div class = "content">
-  <%= yield %>
-</div>
+    <footer class = "row">
+      <div class = "small-12 small-centered medium-8 medium-centered large-5 large-centered columns text-center">
+        <% if logged_in? %>
+          <%= link_to "Settings", edit_user_path(current_user) %>
+        <% end %>
+      </div>
+    </footer>
 
-</body>
+  </body>
 </html>
