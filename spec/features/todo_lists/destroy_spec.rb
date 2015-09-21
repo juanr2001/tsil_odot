@@ -17,6 +17,7 @@ RSpec.feature "Todo List", :type => :feature do
         end
 
         it "is successful when clicking the destroy link" do
+            pending "Deleting todo lists"
             visit "/todo_lists"
 
             within "#todo_list_#{todo_list.id}" do
