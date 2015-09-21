@@ -16,6 +16,7 @@ RSpec.feature "Todo Item", :type => :feature do
 
 
         it "is successful" do
+            pending "Adding delete link"
             visit_todo_list(todo_list)
             within "#todo_item_#{todo_item.id}" do
                 click_link "Delete"

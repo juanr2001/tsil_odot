@@ -34,10 +34,10 @@ RSpec.feature "Todo List", :type => :feature do
         context "with completed items" do
             let!( :completed_todo_item ) { todo_list.todo_items.create( content: "English Quiz", completed_at: 5.minutes.ago ) }
 
-            it "show completed items as complete" do
+            it "show an option to mark incomplete" do
                 visit_todo_list( todo_list )
                 within dom_id_for( completed_todo_item ) do
-                    expect(page).to have_content(completed_todo_item.completed_at)
+                    expect(page).to have_content("Mark Incomplete")
                 end
             end
 

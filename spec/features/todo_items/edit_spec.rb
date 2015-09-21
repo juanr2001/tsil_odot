@@ -18,7 +18,7 @@ RSpec.feature "Todo List", :type => :feature do
         it "is successful with valid content" do
             visit_todo_list(todo_list)
             within("#todo_item_#{todo_item.id}") do
-                click_link "Edit"
+                click_link todo_item.content
             end
             fill_in "Content", with: "Study Multiplications"
             click_button "Save"
@@ -30,7 +30,7 @@ RSpec.feature "Todo List", :type => :feature do
         it "is unsuccessful with no valid content" do
             visit_todo_list(todo_list)
             within("#todo_item_#{todo_item.id}") do
-                click_link "Edit"
+                click_link todo_item.content
             end
             fill_in "Content", with: ""
             click_button "Save"
@@ -44,7 +44,7 @@ RSpec.feature "Todo List", :type => :feature do
         it "is unsuccessful with not enough content" do
             visit_todo_list(todo_list)
             within("#todo_item_#{todo_item.id}") do
-                click_link "Edit"
+                click_link todo_item.content
             end
             fill_in "Content", with: "h"
             click_button "Save"
