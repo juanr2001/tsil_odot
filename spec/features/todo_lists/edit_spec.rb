@@ -14,7 +14,6 @@ RSpec.feature "Todo List", :type => :feature do
 
         def update_todo_list( options = { } )
             options[ :title ] ||= "My todo list"
-            options[ :description ] ||= "This is my todo list"
 
             todo_list = options[ :todo_list ]
 
@@ -25,7 +24,6 @@ RSpec.feature "Todo List", :type => :feature do
             end
 
             fill_in "Title", with: options[:title]
-            fill_in "Description", with: options[:description]
             click_button "Update Todo list"
         end
 
@@ -39,8 +37,7 @@ RSpec.feature "Todo List", :type => :feature do
         it "updates a todo list successfully with correct information" do
 
             update_todo_list todo_list: todo_list,
-                                        title: "New title",
-                                        description: "New Description"
+                                        title: "New title"
 
             #So This code is what fetch the lates update from the database.
             todo_list.reload
@@ -49,7 +46,6 @@ RSpec.feature "Todo List", :type => :feature do
             #When I run the test it fail until it hits this line, because it didn't take the new value in the database
             #to get the test to pass I need to write 'todo_list.reload' make the test fetch the updated value from the database.
             expect(todo_list.title).to eq("New title")
-            expect(todo_list.description).to eq("New Description")
         end
 
         it "displays an error with no title" do
@@ -66,16 +62,5 @@ RSpec.feature "Todo List", :type => :feature do
             update_todo_list todo_list: todo_list, title: "Hi"
             expect(page).to have_content("error")
         end
-
-        it "displays an error with no description" do
-            update_todo_list todo_list: todo_list, description: ""
-            expect(page).to have_content("error")
-        end
-
-        it "displays an error with too short a description" do
-            update_todo_list todo_list: todo_list, description: "hi"
-            expect(page).to have_content("error")
-        end
-
     end
 end
