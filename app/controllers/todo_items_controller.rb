@@ -54,13 +54,8 @@ class TodoItemsController < ApplicationController
     def complete
         @todo_item = @todo_list.todo_items.find( params[ :id ] )
         #Time.now, will create a time of that exact moment when I press the button
-        if @todo_item.complete?
-            @todo_item.update_attribute( :completed_at, nil )
-        else
-            @todo_item.update_attribute( :completed_at, nil )
-        end
-
-        redirect_to todo_list_todo_items_path, notice: "Todo item marked as complete."
+        @todo_item.toggle_completion!
+        redirect_to todo_list_todo_items_path, notice: "Todo item updated."
     end
 
 #This method will prevent me to write (@todo_list_id) in the controller and the view every time
