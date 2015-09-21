@@ -35,7 +35,7 @@ RSpec.feature "Todo List", :type => :feature do
         end
 
         it "updates a todo list successfully with correct information" do
-
+            pending "Editing todo lists"
             update_todo_list todo_list: todo_list,
                                         title: "New title"
 
@@ -49,6 +49,7 @@ RSpec.feature "Todo List", :type => :feature do
         end
 
         it "displays an error with no title" do
+            pending "Editing todo lists"
             update_todo_list todo_list: todo_list, title: ""
 
             title = todo_list.title
@@ -59,6 +60,7 @@ RSpec.feature "Todo List", :type => :feature do
         end
 
         it "displays an error with too short attr_reader :name title" do
+            pending "Editing todo lists"
             update_todo_list todo_list: todo_list, title: "Hi"
             expect(page).to have_content("error")
         end
