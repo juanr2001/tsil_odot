@@ -14,6 +14,6 @@ RSpec.describe "todo_lists/index", type: :view do
 
   it "renders a list of todo_lists" do
     render
-    assert_select "div.todo_list h2", :text => "Title".to_s, :count => 2
+    assert_select "ul.todo-lists div", :text => "Title".to_s, :count => 2
   end
 end
