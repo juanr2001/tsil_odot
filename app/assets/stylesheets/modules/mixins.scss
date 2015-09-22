@@ -1,3 +1,4 @@
+/*this asset is the variable that will include the icon picture in /partials/icon*/
 @mixin icon($asset) {
     background: url(asset_path(#{$asset})) no-repeat center center;
     background-size: contain;
