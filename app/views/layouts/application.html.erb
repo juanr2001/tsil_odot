@@ -9,6 +9,7 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+
     <% flash.each do | type, message | %>
         <div class = "flash alert-box text-center <%= type %>" >
             <%= message %>
@@ -20,29 +21,13 @@
     <header class = "row global-header">
     <!-- screen sizes -->
       <div class = "small-12 small-centered medium-8 medium-centered large-5 large-centered columns">
-        <%= link_to "Todo Lists", todo_lists_path %>
         <% if logged_in? %>
-
-          <div class = "small-4 columns header-icon">
-            <%= link_to "Sign Out", logout_path, method: :delete, class: "icon-signout hide-text" %>
-          </div>
-          <div class = "small-4 columns">
-            <h1 class = "logo"><%= link_to "Odot", todo_lists_path, class: "hide-text" %>
-            </h1>
-          </div>
-          <div class = "small-4 column header-icon">
-            <a href="#" class = "icon-new right hide-text">Add Item</a>
-          </div>
-
+          <%= render partial: 'layouts/header_logged_in' %>
         <% else %>
-          <div class = "small-4 columns header-icon">
-            <%= link_to "Sign In", new_user_session_path %>
-            <%= link_to "Sign Up", new_user_path %>
-          </div>
-          <div class = "small-4 columns header-icon">
-          </div>
+          <%= render partial: 'layouts/header_logged_out' %>
         <% end %>
       </div>
+
     </header><!-- /header -->
 
     <!-- row collapse create a new row, will make sure  collumns expand edge to edge when it gets to smaill-12-->
