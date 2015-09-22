@@ -14,7 +14,12 @@
  *= require_self
 
  */
-@import 'partials/header';
+/* variables always comes first, bc I might user it on the imports below */
+    @import 'modules/variables';
+ /* modules second, variables might be used in helpers and use in imports below*/
+    @import 'modules/helpers';
+
+ @import 'partials/header';
  @import 'partials/todo_lists';
  @import 'partials/todo_items';
 
