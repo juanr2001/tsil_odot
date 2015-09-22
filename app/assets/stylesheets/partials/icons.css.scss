@@ -1,4 +1,5 @@
 .icon-arrow-left{
+/*includ calls the missing I declared in mixins*/
     @include icon("icon-arrow-left.svg");
 
 }
