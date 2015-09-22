@@ -7,10 +7,10 @@ RSpec.feature "User", :type => :feature do
             User.create( first_name: "Juan", last_name: "Ordaz", email: "juanordaz@gmail.com", password: "password", password_confirmation: "password" )
 
             visit "/"
-            click_link "Log In"
+            click_link "Sign In"
             fill_in "Email Address", with: "juanordaz@gmail.com"
             fill_in "Password", with: "password"
-            click_button "Log In"
+            click_button "Sign In"
             expect(page).to have_content( "Todo Lists" )
             expect(page).to have_content( "Thanks for logging in!" )
         end
@@ -19,7 +19,7 @@ RSpec.feature "User", :type => :feature do
             visit new_user_session_path
             fill_in "Email Address", with: "juanordaz@gmail.com"
             fill_in "Password", with: "incorrect"
-            click_button "Log In"
+            click_button "Sign In"
 
             expect( page ).to have_content( "Please check your email and password" )
             expect( page ).to have_field( "Email Address", with: "juanordaz@gmail.com" )

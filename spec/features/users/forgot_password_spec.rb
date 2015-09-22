@@ -28,12 +28,12 @@ RSpec.feature "User", :type => :feature do
             expect( page ).to have_content( "Password updated" )
             expect( page.current_path ).to eq( todo_lists_path )
 
-            click_link "Log Out"
+            click_link "Sign Out"
             expect( page ).to have_content( "You must me logged in" )
             visit login_path
             fill_in "Email", with: user.email
             fill_in "Password", with: "new_password"
-            click_button "Log In"
+            click_button "Sign In"
             expect( page ).to have_content( "Thanks for logging in" )
         end
     end
