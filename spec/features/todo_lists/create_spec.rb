@@ -12,8 +12,8 @@ RSpec.feature "Todo List", :type => :feature do
             visit "/todo_lists"
             #This is how I can output the html to makesure what is the output, for debuggin
             # puts page.body
-            click_link "New Todo list"
-            expect(page).to have_content("New Todo List")
+            click_link "Add Todo List"
+            expect(page).to have_content("Add Todo List")
 
             fill_in "Title", with: options[:title]
             click_button "Create Todo list"

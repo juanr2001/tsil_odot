@@ -13,7 +13,7 @@ RSpec.feature "Todo List", :type => :feature do
 
         it "is successful with valid content" do
             visit_todo_list(todo_list)
-            click_link "New Todo Item"
+            click_link "Add Todo Item"
             fill_in "Content", with: "Milk"
             click_button "Save"
             expect(page).to have_content("Added todo list item.")
@@ -24,7 +24,7 @@ RSpec.feature "Todo List", :type => :feature do
 
         it "displays an error with no content" do
             visit_todo_list(todo_list)
-            click_link "New Todo Item"
+            click_link "Add Todo Item"
             fill_in "Content", with: ""
             click_button "Save"
             #checking the flash message from the controller.
@@ -36,7 +36,7 @@ RSpec.feature "Todo List", :type => :feature do
 
         it "displays an error with content less than 2 characters long" do
             visit_todo_list(todo_list)
-            click_link "New Todo Item"
+            click_link "Add Todo Item"
             fill_in "Content", with: "H"
             click_button "Save"
             #checking the flash message from the controller.
