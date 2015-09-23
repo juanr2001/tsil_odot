@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def go_back_link_to(path)
+    @go_back_link_to ||= path
+    @go_back_link_to
+  end
+
   def render_404
     render file 'public/400.html', status: :not_found, layout: false
   end
