@@ -1,3 +1,6 @@
+<!-- title method is defind in app/helpers/application_helper-->
+<% title "Editing Todo Item" %>
+
 <h1><%= @todo_list.title %> - Editing Todo List Item</h1>
 
 <%= form_for [@todo_list, @todo_item] do | form |%>
