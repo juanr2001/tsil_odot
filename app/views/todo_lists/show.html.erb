@@ -1,4 +1,6 @@
-<h1><%= @todo_list.title %></h1>
+<!-- title method is defind in app/helpers/application_helper-->
+<%= title @todo_list.title%>
+
 <!-- Incomplete Items -->
 <% if @todo_list.has_incomplete_items? %>
     <h3>Incomplete Items: </h3>
