@@ -1,4 +1,6 @@
-<h1>Change Your Password</h1>
+<!-- title method is defind in app/helpers/application_helper-->
+<%= title "Change Your Password" %>
+
 <%= form_for @user, url: password_reset_path(@user.password_reset_token), html: { method: :patch } do | form |%>
 
     <%= form.label :password %>
