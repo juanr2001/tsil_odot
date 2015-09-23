@@ -2,7 +2,7 @@ class TodoListsController < ApplicationController
 
   before_action :require_user
   before_action :set_todo_list, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_back_link, except: [:index]
   # GET /todo_lists
   # GET /todo_lists.json
   def index
@@ -64,6 +64,10 @@ class TodoListsController < ApplicationController
   end
 
   private
+    #go back method is called from application_controller.rb
+    def set_back_link
+      go_back_link_to todo_lists_path
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_todo_list
       @todo_list = current_user.todo_lists.find(params[:id])
