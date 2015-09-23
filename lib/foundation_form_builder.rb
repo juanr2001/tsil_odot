@@ -8,45 +8,43 @@ class FoundationFormBuilder < ActionView::Helpers::FormBuilder
 
     attr_accessor :output_buffer
 
-   # <div class = "row">
-   #    <div class = "small-12 columns">
-   #      <%= f.text_field :title %>
-   #    </div>
-   #  </div>
-
    def text_field( attribute, options = {} )
     options[ :lable ] ||= attribute
-    #Now I can pass a string with "Now I Have a String"
     label_text ||= options.delete( :label ).to_s.titleize
-        wrapper do
-        # content_tag(:div, class: "row" ) do
-        #     content_tag( :div, class: "small-12 columns") do
-                #label
-                label( attribute, label_text ) +
-                #title, super calls ActionView Helpers text_field
-                super( attribute, options )
-        #     end
-        # end
-        end
+    label_options ||= {}
+    if errors_on?(attribute)
+        # label_options[ :class ] = "error"
+        # options[ :class ] = "error"
+        wrapper_options = { wrapper_classes: "error"}
+    end
+    wrapper( wrapper_options ) do
+        label( attribute, label_text, label_options ) +
+        super( attribute, options ) + errors_for_field(attribute)
+    end
    end
+
+    def errors_on?( attribute )
+        object.errors[ attribute ].size > 0
+    end
 
    def submit( text, options = {} )
         options[ :class ] ||= "button radius expand"
         wrapper do
-        # content_tag( :div, class: "row" ) do
-        #     content_tag( :div, class: "small-12 columns" ) do
-                super(text, options)
-            # end
-        # end
+            super(text, options)
         end
    end
 
    def wrapper( options = {}, &block)
         content_tag( :div, class: "row") do
-            #by default content tag allows to pass text inside a div content_tag( :div, text, class: "small-12 columns")
-            #using Capture Helper I can pass a block of text instead. So It allows me to pass super(text, label_text) inside the block
-            content_tag( :div, capture(&block), class: "small-12 columns")
+            content_tag( :div, capture(&block), class: "small-12 columns #{ options[ :wrapper_classes ] }")
         end
+   end
+
+   def errors_for_field( attribute, options = {} )
+    return "" if object.errors[ attribute ].empty?
+    #since form_for calls an object, I can call the word object here. because is inside the form_for block
+    #so the errors are call from the model validations, depending on the model and the attribute.
+    content_tag( :small, object.errors[ attribute ].to_sentence.capitalize, class: "error" )
    end
 
 end
