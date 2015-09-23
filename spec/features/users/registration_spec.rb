@@ -8,7 +8,7 @@ RSpec.feature "User", :type => :feature do
 
             visit "/"
             expect(page).to have_content("Sign Up")
-            click_link "Sign Up"
+            within( "header" ) { click_link "Sign Up" }
 
             fill_in "First Name", with: "FirstName"
             fill_in "Last Name", with: "FirstName"
