@@ -1,7 +1,7 @@
 <!-- title method is defind in app/helpers/application_helper-->
 <%= title "Todo Lists" %>
 
-<ul class = "todo-lists no-bullet">
+<ul class = "list todo-lists no-bullet">
     <% @todo_lists.each do |todo_list| %>
         <li id="<%= dom_id(todo_list) %>" class = "clearfix">
             <%=  link_to todo_list_todo_items_path(todo_list), class: "row" do %>
