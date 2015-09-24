@@ -26,7 +26,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
  gem 'bcrypt', '~> 3.1.7'
  #design
  gem 'foundation-rails', '~> 5.5.2.1'
-
+# https://github.com/bokmann/font-awesome-rails
+ gem 'font-awesome-rails', '~> 4.4.0.0'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
