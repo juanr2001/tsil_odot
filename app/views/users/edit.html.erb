@@ -8,9 +8,9 @@
         <legend>
             About You
         </legend>
-          <%= f.text_field :first_name %>
+          <%= f.text_field :first_name, autofocus: "autofocus" %>
           <%= f.text_field :last_name %>
-          <%= f.text_field :email %>
+          <%= f.email_field :email %>
     </fieldset>
 
     <fieldset>
