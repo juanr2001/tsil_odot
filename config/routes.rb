@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 #main
-  root 'todo_lists#index'
+  root 'pages#home'
 
   get "/login" => "user_sessions#new", as: :login
   delete "/logout" => "user_sessions#destroy", as: :logout
