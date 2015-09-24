@@ -24,7 +24,7 @@ class FoundationFormBuilder < ActionView::Helpers::FormBuilder
    #capture - CaptureHelper
    def wrapper( options = {}, &block )
         content_tag( :div, class: "row" ) do
-            content_tag( :div, capture(&block), class: "small-12 columns #{ options[ :wrapper_classes ] }")
+            content_tag( :div, capture( &block ), class: "small-12 columns #{ options[ :wrapper_classes ] }")
         end
    end
 
@@ -34,24 +34,23 @@ class FoundationFormBuilder < ActionView::Helpers::FormBuilder
     content_tag( :small, object.errors[ attribute ].to_sentence.capitalize, class: "error" )
    end
 
+   #metaprogramming
+    %w( email_field text_field password_field ).each do | form_method |
+      define_method( form_method ) do | *args |
+        attribute = args[0]
+        options = args[1] || {}
 
-    #errors_on? - line 12
-    #wrapper_classes - required line 27
-    #wrapper block - defined line 25
-    #super - calls the class from source
-   def text_field( attribute, options = {} )
-    options[ :lable ] ||= attribute
-    label_text ||= options.delete( :label ).to_s.titleize
-    label_options ||= {}
-    wrapper_options = { wrapper_classes: "error" }
-    if errors_on?(attribute)
-        wrapper_options
+        options[ :lable ] ||= attribute
+        label_text ||= options.delete( :label ).to_s.titleize
+        label_options ||= {}
+        wrapper_options ||= {}
+        if errors_on?(attribute)
+          wrapper_options = { wrapper_classes: "error" }
+        end
+        wrapper( wrapper_options ) do
+          label( attribute, label_text, label_options ) +
+          super( attribute, options ) + errors_for_field( attribute )
+        end
+      end
     end
-    wrapper( wrapper_options ) do
-        label( attribute, label_text, label_options ) +
-        super( attribute, options ) + errors_for_field(attribute)
-    end
-   end
-
-
 end
