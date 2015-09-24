@@ -1,4 +1,4 @@
-<!-- title method is defind in app/helpers/application_helper-->
+<%= content_for( :title ) do %> <%= @todo_list.title %> | <% end %>
 
 <div class = "row collapse todo-list-title">
     <div class = "small-11 columns">
