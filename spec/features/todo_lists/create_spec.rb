@@ -33,7 +33,7 @@ RSpec.feature "Todo List", :type => :feature do
            expect(TodoList.count).to eq(0)
            create_todo_list title: ""
 
-            expect(page).to have_content("error")
+            expect(page).to have_content(/can't be blank/i)
             expect(TodoList.count).to eq(0)
 
             visit "/todo_lists"
@@ -44,7 +44,7 @@ RSpec.feature "Todo List", :type => :feature do
             expect(TodoList.count).to eq(0)
             create_todo_list title: "Hi"
 
-            expect(page).to have_content("error")
+            expect(page).to have_content(/is too short/i)
             expect(TodoList.count).to eq(0)
 
             visit "/todo_lists"

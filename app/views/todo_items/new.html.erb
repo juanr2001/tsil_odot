@@ -3,5 +3,5 @@
 <!-- FoundationFormBuilder is located in lib/foundations_form_bulder.rb -->
 <%= form_for [@todo_list, @todo_item], builder: FoundationFormBuilder do | form |%>
     <!-- Had to pass locals bc Rails could find the partial-->
-    <%= render partial: 'form', local: {form: form} %>
+    <%= render partial: 'form', locals: {form: form} %>
 <% end %>

@@ -10,8 +10,8 @@ RSpec.feature "User", :type => :feature do
             expect(page).to have_content("Sign Up")
             within( "header" ) { click_link "Sign Up" }
 
-            fill_in "First Name", with: "FirstName"
-            fill_in "Last Name", with: "FirstName"
+            fill_in "First Name", with: "First Name"
+            fill_in "Last Name", with: "Last Name"
             fill_in "Email", with: "email@example.com"
             fill_in "Password", with: "password"
             fill_in "Password (again)", with: "password"
