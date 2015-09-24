@@ -1,6 +1,7 @@
 <!-- title method is defind in app/helpers/application_helper-->
 <%= title "Add Item to #{@todo_list.title}" %>
-
-<%= form_for [@todo_list, @todo_item] do | form |%>
-    <%= render partial: form %>
+<!-- FoundationFormBuilder is located in lib/foundations_form_bulder.rb -->
+<%= form_for [@todo_list, @todo_item], builder: FoundationFormBuilder do | form |%>
+    <!-- Had to pass locals bc Rails could find the partial-->
+    <%= render partial: 'form', local: {form: form} %>
 <% end %>
