@@ -18,7 +18,7 @@
             Change Your Password
         </legend>
           <%= f.password_field :password %>
-          <%= f.password_field :password_confirmation %>
+          <%= f.password_field :password_confirmation, label: "Password (again)" %>
     </fieldset>
 
           <%= f.submit "Save", class: "button radius expand" %>
