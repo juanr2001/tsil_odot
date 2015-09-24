@@ -40,8 +40,8 @@ class FoundationFormBuilder < ActionView::Helpers::FormBuilder
         attribute = args[0]
         options = args[1] || {}
 
-        options[ :lable ] ||= attribute
-        label_text ||= options.delete( :label ).to_s.titleize
+        options[ :label ] ||= attribute.to_s.titleize
+        label_text ||= options.delete(:label)
         label_options ||= {}
         wrapper_options ||= {}
         if errors_on?(attribute)
