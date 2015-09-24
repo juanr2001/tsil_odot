@@ -43,8 +43,9 @@ class FoundationFormBuilder < ActionView::Helpers::FormBuilder
     options[ :lable ] ||= attribute
     label_text ||= options.delete( :label ).to_s.titleize
     label_options ||= {}
+    wrapper_options = { wrapper_classes: "error" }
     if errors_on?(attribute)
-        wrapper_options = { wrapper_classes: "error" }
+        wrapper_options
     end
     wrapper( wrapper_options ) do
         label( attribute, label_text, label_options ) +
