@@ -29,7 +29,7 @@ RSpec.feature "User", :type => :feature do
             expect( page.current_path ).to eq( todo_lists_path )
 
             click_link "Sign Out"
-            expect( page ).to have_content( "You must me logged in" )
+            expect( page ).to have_content( "You have been logged out." )
             visit login_path
             fill_in "Email", with: user.email
             fill_in "Password", with: "new_password"
