@@ -2,23 +2,31 @@
 <html>
   <head>
   <!-- title method is defind in app/helpers/application_helper-->
-    <title><%= yield :title %>Tsil Odot</title>
+    <title>Tsil Odot</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
-  <body>
-
+  <body class = "home">
 
     <%= render partial: "layouts/flash" %>
-  <header>
-    <%= link_to "Sign In", new_user_session_path %>
-    <%= link_to "Sign Up", new_user_path %>
-  </header>
 
-    <%= yield %>
+    <header class = "row global-header">
+    <!-- screen sizes -->
+      <div class = "small-12 small-centered columns">
+          <%= render partial: 'layouts/header_logged_out' %>
+      </div>
+    </header><!-- /header -->
+
+        <%= yield %>
+
+    <footer class = "row global-footer">
+      <div class = "small-12 small-centered columns text-center">
+        <%= link_to "Already have an account? Sign in.", login_path %>
+      </div>
+    </footer>
 
   </body>
 </html>
