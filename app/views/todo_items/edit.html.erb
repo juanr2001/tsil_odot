@@ -1,8 +1,7 @@
 <!-- title method is defind in app/helpers/application_helper-->
 <%= title "Editing Todo Item" %>
+<!-- FoundationFormBuilder is located in lib/foundations_form_bulder.rb -->
+<%= form_for [@todo_list, @todo_item], builder: FoundationFormBuilder do | form |%>
 
-<h1><%= @todo_list.title %> - Editing Todo List Item</h1>
-
-<%= form_for [@todo_list, @todo_item] do | form |%>
-    <%= render partial: form %>
+    <%= render partial: 'form', locals: { form: form } %>
 <% end %>
