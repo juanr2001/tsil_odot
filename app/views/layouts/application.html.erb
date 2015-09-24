@@ -11,13 +11,7 @@
   </head>
   <body>
 
-    <% flash.each do | type, message | %>
-        <div class = "flash alert-box text-center <%= type %>" >
-            <%= message %>
-            <!-- button to dismiss any alert message that pop-up, &times is X to close -->
-            <a href="#" class = "close">&times;</a>
-        </div>
-    <%end%>
+    <%= render partial: "layouts/flash" %>
 
     <header class = "row global-header">
     <!-- screen sizes -->
