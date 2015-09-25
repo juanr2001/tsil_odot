@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   #if I have an invalid signature. If I user edit the cookie it raises Message Verifier
   rescue_from ActiveSupport::MessageVerifier::InvalidSignature, with: :render_error
 
+
   private
 
   def go_back_link_to(path)
