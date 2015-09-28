@@ -19,12 +19,13 @@ RSpec.feature "Todo List", :type => :feature do
 
             visit "/todo_lists"
             #Here I tell Capybara to select an object with an id.
-            within "#todo_list_#{todo_list.id}" do
-                click_link "Edit"
-            end
-
+            # within "#todo_list_#{todo_list.id}" do
+            #     click_link "Edit"
+            # end
+            click_link todo_list.title
+            click_link "Edit"
             fill_in "Title", with: options[:title]
-            click_button "Update Todo list"
+            click_button "Save"
         end
 
         #sign_in user here
@@ -35,7 +36,7 @@ RSpec.feature "Todo List", :type => :feature do
         end
 
         it "updates a todo list successfully with correct information" do
-            pending "Editing todo lists"
+
             update_todo_list todo_list: todo_list,
                                         title: "New title"
 
@@ -49,20 +50,20 @@ RSpec.feature "Todo List", :type => :feature do
         end
 
         it "displays an error with no title" do
-            pending "Editing todo lists"
+
             update_todo_list todo_list: todo_list, title: ""
 
             title = todo_list.title
             todo_list.reload
             expect(todo_list.title).to eq(title)
 
-            expect(page).to have_content("error")
+            expect(page).to have_content(/can't be blank/i)
         end
 
         it "displays an error with too short attr_reader :name title" do
-            pending "Editing todo lists"
+
             update_todo_list todo_list: todo_list, title: "Hi"
-            expect(page).to have_content("error")
+            expect(page).to have_content(/is too short/i)
         end
     end
 end

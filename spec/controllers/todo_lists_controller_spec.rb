@@ -76,13 +76,6 @@ RSpec.describe TodoListsController, type: :controller do
     end
   end
 
-  describe "GET #show" do
-    it "assigns the requested todo_list as @todo_list" do
-      todo_list = user.todo_lists.create! valid_attributes
-      get :show, {:id => todo_list.to_param}, valid_session
-      expect(assigns(:todo_list).user).to eq(user)
-    end
-  end
 
   describe "GET #new" do
     it "assigns a new todo_list as @todo_list fr the logged in" do
@@ -115,9 +108,9 @@ RSpec.describe TodoListsController, type: :controller do
         expect(assigns(:todo_list)).to be_persisted
       end
 
-      it "redirects to the created todo_list" do
+      it "redirects to the created todo list items" do
         post :create, {:todo_list => valid_attributes}, valid_session
-        expect( response ).to redirect_to(TodoList.last)
+        expect( response ).to redirect_to(todo_list_todo_items_path(TodoList.last))
       end
 
       it "creates a todo list for the current user" do
@@ -170,10 +163,10 @@ RSpec.describe TodoListsController, type: :controller do
         expect(assigns(:todo_list).user).to eq(user)
       end
 
-      it "redirects to the todo_list" do
+      it "redirects to the todo_list items" do
         todo_list = user.todo_lists.create! valid_attributes
         put :update, {:id => todo_list.to_param, :todo_list => valid_attributes}, valid_session
-        expect(response).to redirect_to(todo_list)
+        expect(response).to redirect_to(todo_list_todo_items_path(todo_list))
       end
     end
 

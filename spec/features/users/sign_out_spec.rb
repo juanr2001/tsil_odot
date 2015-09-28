@@ -12,7 +12,7 @@ RSpec.feature "User", :type => :feature do
         expect(page).to have_content("Sign Out")
         click_link "Sign Out"
         expect(page).to_not have_content("Sign Out")
-        expect(page).to have_content("Sign In")
+        expect(page).to have_content("Sign in")
      end
     end
 end
