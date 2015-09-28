@@ -1,4 +1,4 @@
-$(document).ready ->
+toggleTodoListFunctions = ->
     $('.todo-list-title').on 'click', (event) ->
         event.preventDefault()
         $functions = $('#todo-list-functions')
