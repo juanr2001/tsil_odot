@@ -1,7 +1,7 @@
 class TodoListsController < ApplicationController
 
   before_action :require_user
-  before_action :set_todo_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_todo_list, only: [:show, :edit, :update, :destroy, :email ]
   before_action :set_back_link, except: [:index]
   # GET /todo_lists
   # GET /todo_lists.json
@@ -57,6 +57,7 @@ class TodoListsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
   def email
     destination = params[ :to ]
     notifier = Notifier.todo_list( @todo_list, destination )
