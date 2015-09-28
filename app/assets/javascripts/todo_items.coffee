@@ -8,3 +8,6 @@ $(document).ready ->
         if $functions.is(":visible")
             $('.todo-list-title span').removeClass('fa-caret-up').addClass('fa-caret-down')
             return $functions.slideUp('fast')
+
+$(document).ready toggleTodoListFunctions
+$(document).on 'page:load', toggleTodoListFunctions
