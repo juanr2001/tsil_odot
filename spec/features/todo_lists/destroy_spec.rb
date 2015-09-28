@@ -17,12 +17,11 @@ RSpec.feature "Todo List", :type => :feature do
         end
 
         it "is successful when clicking the destroy link" do
-            pending "Deleting todo lists"
             visit "/todo_lists"
-
-            within "#todo_list_#{todo_list.id}" do
-                click_link "Destroy"
-            end
+            click_link todo_list.title
+            # within "#todo_list_#{todo_list.id}" do
+                click_link "Delete"
+            # end
 
             expect(page).to_not have_content(todo_list.title)
             expect(TodoList.count).to eq(0)

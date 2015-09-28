@@ -7,7 +7,7 @@ RSpec.feature "User", :type => :feature do
             User.create( first_name: "Juan", last_name: "Ordaz", email: "juanordaz@gmail.com", password: "password", password_confirmation: "password" )
 
             visit "/"
-            click_link "Sign In"
+            click_link "Sign in"
             fill_in "Email Address", with: "juanordaz@gmail.com"
             fill_in "Password", with: "password"
             click_button "Sign In"
