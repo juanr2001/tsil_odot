@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+#name_spacing
+namespace :api do
+
+  resources :todo_lists, only: [ :index, :show, :create, :update, :destroy ] do
+    resource :todo_items, only: [ :create, :update, :destroy ]
+  end
+end
+
+
 #main
   # get 'pages#home'
 
